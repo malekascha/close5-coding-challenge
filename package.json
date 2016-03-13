@@ -1,0 +1,19 @@
+{
+  "name": "close5-coding-challenge",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.15.0",
+    "chai": "^3.5.0",
+    "chai-http": "^2.0.1",
+    "express": "^4.13.4",
+    "morgan": "^1.7.0",
+    "promise": "^7.1.1"
+  }
+}
