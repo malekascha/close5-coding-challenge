@@ -1,0 +1,11 @@
+#json-display {
+  margin-top: 50px;
+  width: 100%;
+  height: 300px;
+  overflow: auto;
+}
+
+.post {
+  border: 2px solid black;
+  margin-bottom: 2px
+}

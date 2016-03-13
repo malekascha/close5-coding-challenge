@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Dependencies -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.0/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/1.2.4/ui-bootstrap-tpls.min.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <!-- Angular Scripts -->
+    <script src="./app/app.js"></script>
+    <script src="./app/controller.js"></script>
+    <script src="./app/factory.js"></script>
+  </head>
+  <body ng-app="Close5">
+    <div ng-controller="MainController">
+
+      <div class="container">
+
+          <div class="jumbotron" id="json-display">
+              <div ng-repeat="post in posts" class="post">
+                <ul>
+                  <li>ID: {{post.id}}</li>
+                  <li>Loc: {{post.loc}}</li>
+                  <li>userId: {{post.userId}}</li>
+                  <li>price: {{post.price}}</li>
+                  <li>date: {{post.createdAt}}</li>
+                  <li>status: {{post.status}}</li>
+                  <li>description: {{post.description}}</li>
+                </ul>
+              </div>
+          </div>
+          <div>
+             <uib-tabset active="active">
+              <uib-tab index="0" active heading="Fetch All Posts">
+                <!-- <div class="btn-group"> -->
+                <div>
+                  <h3>Compare posts by:</h3>
+                  <input type="radio" class="btn btn-primary" ng-model="allPosts.compare" value="createdAt">Date</input>
+                  <input type="radio" class="btn btn-primary" ng-model="allPosts.compare" value="price">Price</input>
+                </div>
+                <div>
+                  <h3>Order by:</h3>
+                  <input type="radio" class="btn btn-primary" ng-model="allPosts.order" value="ascending">Ascending</input>
+                  <input type="radio" class="btn btn-primary" ng-model="allPosts.order" value="descending">Descending</input>
+                </div>
+                <br>
+                <button ng-click="retrieveAll()">Fetch posts</button>
+                <!-- </div> -->
+              </uib-tab>
+              <uib-tab index="1" heading="Fetch By User">
+                <h3>Enter User ID:</h3>
+                <input ng-model="user.id"></input>
+                <button ng-click="retrieveUser()">Retrieve User Posts</button>
+              </uib-tab>
+              <uib-tab index="2" heading="Fetch Single Post">
+                <h3>Enter Post ID:</h3>
+                <input ng-model="singlePost.id"></input>
+                <button ng-click="retrieveSinglePost()">Retrieve Post</button>
+              </uib-tab>
+              <uib-tab index="3" heading="Fetch By Location">
+                <h3>Latitude:</h3>
+                <input ng-model="loc.lat"></input>
+                <h3>Longitude:</h3>
+                <input ng-model="loc.lon"></input>
+                <h3>Distance (mi):</h3>
+                <input ng-model="loc.dist"></input>
+                <button ng-click="retrieveByLoc()">Retrieve Posts Within {{loc.dist}} miles</button>
+              </uib-tab>
+              <uib-tab index="4" heading="API Guide">
+                <p>To access the values available in this API, use the tabs above. There are multiple sorting options available, and the data will appear in the jumbotron when it is returned from the API.</p>
+                <p>If you wish to query the API directly, you can use the following paths. Please note that an array will always be returned, regardless of how many posts there are.</p>
+                <ul>
+                  <li>/all: Returns all postings. Takes a POST request containing an object with two keys, order and compare. The possible values for order are 'ascending' and descending'. The possible values for compare are 'createdAt' and 'price'.</li>
+                  <li>/user: Returns all posts by a given user. Takes a POST request containing an object with one key, id.</li>
+                  <li>/single: Returns a single post. Takes a POST request containing an object with one key, id.</li>
+                  <li>/loc: Returns all posts within a given distance from a given set of coordinates. Takes a POST request containing an object with three keys: lat, lon, and dist. Lat and lon are the latitude and longitude, and dist is the distance from the coordinates.</li>
+                </ul>
+              </uib-tab>
+            </uib-tabset>
+          </div>
+
+
+      </div>
+    </div>
+  </body>
+</html>
